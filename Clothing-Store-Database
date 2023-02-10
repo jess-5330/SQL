@@ -1,0 +1,48 @@
+# Example of a clothing store 
+
+#Creating a table with 6 columns to represent unique identifier, clothing brand, sizing, price, and
+#how many items are stored 
+
+CREATE TABLE bodacious (id INTEGER PRIMARY KEY, brand TEXT, article TEXT, size TEXT, price INTEGER, quantity INTEGER);
+
+#inserting the items into the table 
+
+INSERT INTO bodacious VALUES(1, "Ivy Park", "shorts", "0",99.99, 1);
+INSERT INTO bodacious VALUES(2, "Ivy Park", "shoes", "8", 104.99, 1);
+INSERT INTO bodacious VALUES(3, "Savage FENTY", "bra", "32", 54.99, 2);
+INSERT INTO bodacious VALUES(4, "North Face", "jacket", "s", 35.99, 3);
+INSERT INTO bodacious VALUES(5, "Ivy Park", "jacket", "s", 115.99, 3);
+INSERT INTO bodacious VALUES(6, "North Face", "t-shirt", "m", 24.99, 1);
+INSERT INTO bodacious VALUES(7, "Savage FENTY", "thong", "s", 25.99, 1);
+INSERT INTO bodacious VALUES(8, "Ivy Park", "socks", "8", 19.99, 2);
+INSERT INTO bodacious VALUES(9, "Savage FENTY", "lingerie", "s", 79.99,1);
+INSERT INTO bodacious VALUES(10, "Lulu", "jacket", "l", 54.99, 5);
+INSERT INTO bodacious VALUES(11, "Shein", "jacket", "s", 15.99, 10);
+INSERT INTO bodacious VALUES(12, "SKIM", "bra", "s", 35.99, 2);
+INSERT INTO bodacious VALUES(13, "North Face", "coat", "s", 75.99, 3);
+INSERT INTO bodacious VALUES(14, "Lulu", "dress", "s", 64.99, 4);
+INSERT INTO bodacious VALUES(15, "Miss Lola", "boots", "8", 39.99, 3);
+INSERT INTO bodacious VALUES(16, "Lulu", "dress", "m", 44.99, 3);
+INSERT INTO bodacious VALUES(17, "Ivy Park", "shorts", "1",99.99, 1);
+
+#Selecting from the table the brand name "Ivy Park" and the "shorts" and summing the price of this item from the brand
+
+SELECT brand, article, SUM(price) FROM bodacious WHERE brand = "Ivy Park" AND article = "shorts";
+
+# Displaying the brand with the most amount of items 
+
+SELECT brand, MAX(quantity) FROM bodacious;
+
+# displaying the average price of jackets for all the brands 
+
+SELECT article, AVG(price) FROM bodacious WHERE article = "jacket";
+
+# displaying the brands with prices greater than $50 ordered by lowest to highest
+
+SELECT brand, price FROM bodacious WHERE price > 50 ORDER BY price;
+
+#showing all the brands, prices, and sizes with the price ordered from highest to lowest 
+
+SELECT brand, size, price FROM bodacious ORDER BY price DESC;
+
+
