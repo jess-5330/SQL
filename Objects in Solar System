@@ -48,9 +48,6 @@ INSERT INTO solar_system_objects(body,mean_radius,mean_radius_rel,volume,volume_
 INSERT INTO solar_system_objects(body,mean_radius,mean_radius_rel,volume,volume_rel,mass,mass_rel,density,surface_gravity,surface_gravity_rel,type_of_object,shape) VALUES ('Ceres ',476.2,0.076,0.437,0.0004,0.95,0.000159,2.077,0.27,0.0275,'dwarf planet belt asteroid','round');
 
 
-
-
-
 /* display planets with density greater than 5 */
 
 SELECT density, body FROM solar_system_objects WHERE density > 5 GROUP BY body;
@@ -58,7 +55,8 @@ SELECT density, body FROM solar_system_objects WHERE density > 5 GROUP BY body;
 /* display average surface gravity of planets by shape */ 
 
 SELECT shape, AVG(surface_gravity) as "average_surface_gravity" FROM solar_system_objects GROUP BY shape;
-/* Determine a planet's classification based on the density of the planet #based on probable classification not entirely accurate 
+
+/* Determine a planet's classification based on the density of the planet #based on an estimated classification not entirely accurate 
 
 estimated from here: https://www.open.edu/openlearn/mod/oucontent/view.php?id=66947&section=4.6 */
 
