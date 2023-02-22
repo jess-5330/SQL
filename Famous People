@@ -1,0 +1,65 @@
+/* Create table about the people and what they do here */
+
+/* I want to create a table of singers, songs they wrote, age, who they are married to (other singers) maybe brands if they have them? */ 
+
+/* create a table w/ singers, their names, and their year of birth*/
+
+CREATE TABLE singers(id INTEGER PRIMARY KEY, name TEXT, birthyear INTEGER);
+
+INSERT INTO singers (id, name, birthyear) VALUES (1, "Adele", 1988); 
+
+INSERT INTO singers (id, name, birthyear) VALUES  (2,"Beyonce", 1981);
+
+INSERT INTO singers (id, name, birthyear) VALUES (3, "Jay-Z", 1969); 
+
+INSERT INTO singers (id, name, birthyear) VALUES (4, "Rihanna",1988);
+
+INSERT INTO singers (id, name, birthyear) VALUES (5, "ASAP Rocky", 1988); 
+
+INSERT INTO singers (id, name, birthyear) VALUES (6, "Whitney Houston", 1963); 
+
+INSERT INTO singers (id, name, birthyear) VALUES  (7,"Bobby Brown", 1969);
+
+/* Create another table relating to the singers w/ their songs */
+
+
+CREATE TABLE songs (id INTEGER PRIMARY KEY, person_id INTEGER, name TEXT);
+
+INSERT INTO songs (id, person_id, name) VALUES(1, 2, "Love on Top");
+
+INSERT INTO songs (id, person_id, name) VALUES(2, 6, "I Have Nothing");
+
+INSERT INTO songs (id, person_id, name) VALUES (3, 4, "Love On The Brain");
+
+INSERT INTO songs (id, person_id, name) VALUES (4, 3, "Hard Knock Life");
+
+INSERT INTO songs (id, person_id, name) VALUES(5, 1, "Rolling in the Deep");
+
+INSERT INTO songs (id, person_id, name) VALUES (6, 2, "CUFF IT");
+
+/* Create final table to pair up the singers if they are or were a couple */
+
+CREATE TABLE couples (id INTEGER PRIMARY KEY, singer1_id INTEGER, singer2_id INTEGER);
+
+INSERT INTO couples (id, singer1_id, singer2_id) VALUES (1, 2, 3);
+
+INSERT INTO couples (id, singer1_id, singer2_id) VALUES (2, 4, 5);
+
+INSERT INTO couples (id, singer1_id, singer2_id) VALUES (3, 6, 7);
+
+
+/* Show all the singers born before 1982 */
+
+SELECT name, birthyear FROM singers WHERE birthyear < 1982;
+/* Combine multiple joins to show the couples */
+
+SELECT singer1.name as Singer, singer2.name as Partner FROM couples  JOIN singers singer1 ON couples.singer1_id = singer1.id  JOIN singers singer2 ON couples.singer2_id = singer2.id;
+
+
+/* Select the names of the singers and the songs they have sang w/ a left join to also show the singers who do not have songs*/
+
+SELECT singers.name as Singer, songs.name as Song FROM singers LEFT JOIN songs ON singers.id = songs.person_id;
+
+/* Find the number of songs a singer sang in desc order*/
+
+SELECT singers.name, COUNT(songs.name) AS num_songs FROM singers LEFT OUTER JOIN songs ON singers.id = songs.person_id GROUP BY singers.name ORDER BY num_songs DESC;
