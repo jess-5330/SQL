@@ -1,4 +1,5 @@
--- Example query (PostgreSQL)
+-- In this SQL code, I'm querying a database that's holding Nexflix data to answer questions about the data. 
+
 SELECT * FROM "CharlotteChaze/BreakIntoTech"."netflix_people";
 
 SELECT * FROM "CharlotteChaze/BreakIntoTech"."netflix_people" LIMIT 10;
@@ -54,6 +55,6 @@ FROM "CharlotteChaze/BreakIntoTech"."netflix_people" people
  
 -- What is the oldest movie in the database and what year was it made?
 
-SELECT MIN(DATE(date_added)) 
+SELECT title, release_year
 FROM "CharlotteChaze/BreakIntoTech"."netflix_people" people
- LEFT JOIN "CharlotteChaze/BreakIntoTech"."netflix_titles_info" titles ON people.show_id = titles.show_id;
+ LEFT JOIN "CharlotteChaze/BreakIntoTech"."netflix_titles_info" titles ON people.show_id = titles.show_id WHERE type = 'Movie' ORDER BY release_year LIMIT 1; 
