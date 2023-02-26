@@ -54,4 +54,4 @@ SELECT sum(quantity) / count(customers.acctnum) as Avg_quantity FROM BIT_DB.FebS
 
 --  Which product brought in the most revenue in January and how much revenue did it bring in total?
 
-SELECT sum(quantity * price) AS Revenue, Product FROM BIT_DB.JanSales GROUP BY Product ORDER BY Revenue DESC;
+SELECT sum(quantity * price) AS Revenue, Product FROM BIT_DB.JanSales GROUP BY Product ORDER BY Revenue DESC LIMIT 1;
