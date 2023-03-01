@@ -27,9 +27,6 @@ SELECT EmployeeId, employees.FirstName,
 employees.LastName, InvoiceId, InvoiceDate FROM customers LEFT JOIN employees ON customers.SupportRepId = employees.EmployeeId
 JOIN invoices ON invoices.InvoiceID = customers.CustomerId;
 
---- what if i also want to count how many customers each sales rep helped 
--- top sales person?
-
 
 --Now show invoice total for all invoices and customers 
 SELECT EmployeeId, InvoiceId, customers.FirstName, customers.LastName, employees.FirstName, 
@@ -46,4 +43,8 @@ SELECT ROUND(SUM(Total),2) as 'Total Sales' FROM invoices WHERE InvoiceDate  LIK
 --Write a query that includes the purchased track name with each invoice line ID.
 SELECT InvoiceId, tracks.Name FROM tracks RIGHT JOIN invoice_items ON tracks.TrackId = invoice_items.TrackId; 
 
+--Which sales agent made the most dollar sales in 2009?
+SELECT EmployeeId, InvoiceId, employees.FirstName, employees.LastName, invoices.invoiceDate,
+employees.LastName, SUM(Total)as 'Invoice Total' FROM customers LEFT JOIN employees ON customers.SupportRepId = employees.EmployeeId
+INNER JOIN invoices ON invoices.InvoiceID = customers.CustomerId WHERE invoices.InvoiceDate LIKE('2009%') GROUP BY customers.SupportRepId LIMIT 1; 
 
