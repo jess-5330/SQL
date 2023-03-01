@@ -1,0 +1,49 @@
+-- Show Customers (their full names, customer ID, and country) who are not in the US
+
+SELECT CustomerId, FirstName, LastName, Country
+ FROM chinook.customers WHERE Country NOT IN('USA');
+
+
+-- Show only the Customers from Brazil.
+
+SELECT CustomerId, FirstName, LastName, Country
+FROM chinook.customers WHERE Country = 'Brazil';
+
+--Find the Invoices of customers who are from Brazil. 
+
+SELECT InvoiceID, InvoiceDate, FirstName, LastName, Country FROM invoices 
+LEFT JOIN customers ON customers.CustomerId = invoices.CustomerId WHERE Country = 'Brazil';
+
+-- Show the Employees who are Sales Agents.
+SELECT * FROM employees WHERE title LIKE('%Sales%agent');
+
+-- Find a unique/distinct list of billing countries from the Invoice table.
+SELECT DISTINCT BillingCountry FROM invoices; 
+
+-- shows the invoices associated with each sales agent. The resulting table should include the Sales Agent's full name.
+---need to join customer and employeee id in order to see invoice for each sales rep 
+
+SELECT EmployeeId, employees.FirstName, 
+employees.LastName, InvoiceId, InvoiceDate FROM customers LEFT JOIN employees ON customers.SupportRepId = employees.EmployeeId
+JOIN invoices ON invoices.InvoiceID = customers.CustomerId;
+
+--- what if i also want to count how many customers each sales rep helped 
+-- top sales person?
+
+
+--Now show invoice total for all invoices and customers 
+SELECT EmployeeId, InvoiceId, customers.FirstName, customers.LastName, employees.FirstName, 
+employees.LastName, SUM(Total)as 'Invoice Total' FROM customers LEFT JOIN employees ON customers.SupportRepId = employees.EmployeeId
+INNER JOIN invoices ON invoices.InvoiceID = customers.CustomerId GROUP BY invoices.CustomerId
+
+--How many Invoices were there in 2009?
+SELECT count(InvoiceId) As '# of 2009 Invoices' FROM invoices WHERE InvoiceDate LIKE ('2009%');
+
+--What are the total sales for 2009?
+SELECT ROUND(SUM(Total),2) as 'Total Sales' FROM invoices WHERE InvoiceDate  LIKE ('2009%');
+
+
+--Write a query that includes the purchased track name with each invoice line ID.
+SELECT InvoiceId, tracks.Name FROM tracks RIGHT JOIN invoice_items ON tracks.TrackId = invoice_items.TrackId; 
+
+
